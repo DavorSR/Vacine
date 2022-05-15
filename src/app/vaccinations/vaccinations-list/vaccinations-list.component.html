@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col">
+        <label for="">Personal Number</label>
+        <!-- Koristimo ngModel i filter za sortiranje, podesavamo onChange(u ovom slucaju) i dodajemo ime funkcije -->
+        <input [(ngModel)]="params.filter.personal_number" (change)="getVaccines()" type="text" class="form-control">
+    </div>
+    <div class="col">
+        <label for="">Vaccine</label>
+        <select [(ngModel)]="params.filter.vaccine_id" (change)="getVaccines()" name="" id="" class="form-select">
+            <option  value="">All</option>
+            <option *ngFor="let i of vakcine" value="{{i._id}}">{{i.name}} ({{i.manufacturer}})</option>
+        </select>
+
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Personal number</th>
+            <th scope="col">Name</th>
+            <th scope="col">Healthcare institution</th>
+            <th scope="col">Vaccine</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of vaccinations">
+            <td>{{i.personal_number}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.healthcare_institution}}</td>
+            <td>{{i.vaccine.name}} ({{i.vaccine.manufacturer}})</td>
+            <!-- Za interpolaciju u ruti ne trebaju {{}} -->
+            <td><button [routerLink]="['/persons/', i.personal_number]" class="btn btn-secondary">Person details</button></td>
+        </tr>
+
+    </tbody>
+</table>
+<div class="e">
+    <!-- Ucitava sledecih (5) ili koliko stavimo unosa i reguje onClick hvatajuci odredjenu funckiju -->
+    <button (click)="onClick(5)" (click)="getVaccines()" class="btn btn-secondary">Load more</button>
+
+</div>

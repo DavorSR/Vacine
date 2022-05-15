@@ -1,0 +1,50 @@
+<!-- Definisati formGroup za kontrolu forme -->
+<!-- Za validaciju ogranicavanje polja se koristila html opcija -->
+
+<form [formGroup]="vakcinaForm" (submit)="onSubmit()">
+
+	<div class="form-group row">
+		<label for="personal_number" class="col-2 col-form-label">Personal Number</label>
+		<div class="col-7">
+			<!-- formControlName naziv se mora slagati sa definisanim fb.group parametrima -->
+			<input class="form-control" type="text" id="personalNumber" placeholder="personal_number"
+				formControlName="personal_number" min="1">
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="name" class="col-2 col-form-label">Name</label>
+		<div class="col-7">
+			<input class="form-control" type="text" id="name" placeholder="name"
+				formControlName="name" minlength="2">
+		</div>
+	</div>
+  
+	<div class="form-group row">
+		<label for="healthcare_institution" class="col-2 col-form-label">Healthcare</label>
+		<div class="col-7">
+			<input class="form-control" type="text" id="healthcare_institution" placeholder="healthcare_institution"
+				formControlName="healthcare_institution" required>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label for="vaccine" class="col-2 col-form-label">Vaccine</label>
+		<div class="col-7">
+			<select formControlName="vaccine" name="vaccine" required>
+				<!-- koristimo ngFor petlju da prodje kroz svu listu i value id da cilja vrednost u selektoru za svaki niz  -->
+        <option *ngFor="let i of vakcine" value="{{i._id}}">{{i.name}} ({{i.manufacturer}})</option>
+      </select>
+		</div>
+	</div>
+
+	
+
+
+
+	<div class="form-group row float-right">
+		<div class="col-12">
+			<button class="btn btn-primary" type="submit">Submit</button>
+		</div>
+	</div>
+</form>
